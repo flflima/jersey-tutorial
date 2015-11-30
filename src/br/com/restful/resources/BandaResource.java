@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -61,4 +63,29 @@ public class BandaResource
 		return banda.getNome() + " adicionado.";
 	}
 
+	@Path("{id}")
+	@PUT
+	@Consumes("text/xml")
+	@Produces("text/plain")
+	public String atualizaBanda(Banda banda, @PathParam("id") int id) 
+	{
+		// para atualizar um objeto:
+		// curl -X PUT -H "Content-type:text/xml" -d "<banda><nome>Teste Novo</nome><anoDeFormacao>2010</anoDeFormacao></banda>" http://localhost:8080/jersey-tutorial/bandas/3
+		Banda atual = bandasMap.get(id);
+		atual.setNome(banda.getNome());
+		atual.setAnoDeFormacao(banda.getAnoDeFormacao());
+		return banda.getNome() + " atualizada.";
+	}
+
+	@Path("{id}")
+	@DELETE
+	@Produces("text/plain")
+	public String removeBanda(@PathParam("id") int id) 
+	{
+		// para atualizar um objeto:
+		// curl -X DELETE http://localhost:8080/jersey-tutorial/bandas/3
+		bandasMap.remove(id);
+		return "Banda removida.";
+	}
+	
 }
