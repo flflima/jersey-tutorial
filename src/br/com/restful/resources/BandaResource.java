@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,6 +47,18 @@ public class BandaResource
 	public Banda getBanda(@PathParam("id") int id) 
 	{
 		return bandasMap.get(id);
+	}
+	
+	@POST
+	@Consumes("text/xml")
+	@Produces("text/plain")
+	public String adicionaBanda(Banda banda) 
+	{
+		// para adicionar um objeto:
+		// curl -X POST -H "Content-type:text/xml" -d "<banda><nome>Teste</nome><anoDeFormacao>2010</anoDeFormacao></banda>" http://localhost:8080/jersey-tutorial/bandas
+		banda.setId(bandasMap.size() + 1);
+		bandasMap.put(banda.getId(), banda);
+		return banda.getNome() + " adicionado.";
 	}
 
 }
