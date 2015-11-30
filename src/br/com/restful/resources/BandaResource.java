@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import br.com.restful.model.Banda;
@@ -36,6 +37,14 @@ public class BandaResource
 	public List<Banda> getBandas() 
 	{ 
 		return new ArrayList<Banda>(bandasMap.values());
+	}
+	
+	@Path("{id}")
+	@GET
+	@Produces("text/xml")
+	public Banda getBanda(@PathParam("id") int id) 
+	{
+		return bandasMap.get(id);
 	}
 
 }
