@@ -37,7 +37,8 @@ public class BandaResource
 	}
 	
 	@GET
-	@Produces("text/xml")
+//	@Produces("text/xml")
+	@Produces("application/json")
 	public List<Banda> getBandas() 
 	{ 
 		return new ArrayList<Banda>(bandasMap.values());

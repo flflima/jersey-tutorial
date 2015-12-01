@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Bandas</title>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	$(function() 
+	{
+		$.getJSON("/jersey-tutorial/rest/bandas", function(data) 
+		{
+			$.each(data.banda, function(i, item)
+			{
+				$("#bandas").append("<li>" + item.nome + "</li>");
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<ul id="bandas">
+	</ul>
+</body>
+</html>
